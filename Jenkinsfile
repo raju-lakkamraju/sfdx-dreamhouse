@@ -8,6 +8,7 @@ pipeline {
 	SFDX_CONNECTED_APP_CONSUMER_KEY = "3MVG9LBJLApeX_PC2OLY0P9EKpf.C6D9RMSrkNA7ymOrYXx0mi82ZJN4ookm6lzGVHRM0uAYrRb1TnoOJrPxT"
 	SFDX_DEVHUB_LOGIN_USER = "slakkamraju@visio.com"
 	SFDX_CLIENT_LIBRARIES_HOME = "/usr/local/bin"
+	SCRATCH_ORG_NAME = "sample1_ci_test"
 	
 
     }
@@ -34,8 +35,8 @@ pipeline {
             steps {
                 script {
                     // need to pull out assigned username
-                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a dreamhouse-org"
-                    echo "${rmsg}"
+                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a dreamhouse-org" --jason
+                    //echo "${rmsg}"
                     def robj = readJSON text: rmsg
                     if (robj.status != 0) { 
                         error 'Scratch org creation failed: ' + robj.message 

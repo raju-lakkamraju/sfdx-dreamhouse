@@ -22,7 +22,7 @@ pipeline {
         stage('Authenticate SFDX') {
             steps {
                 script {
-                    rc = sh (returnStatus: true, script: "{TOOLBELT}/sfdx force:auth:jwt:grant --clientid ${SFDX_LOGIN_PSW} --username ${SFDX_LOGIN_USR} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_URL}")
+                    rc = sh (returnStatus: true, script: "${TOOLBELT}/sfdx force:auth:jwt:grant --clientid ${SFDX_LOGIN_PSW} --username ${SFDX_LOGIN_USR} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_URL}")
                     
                     if (rc != 0) {
                          error 'Failed to authorize Salesforce DX' 

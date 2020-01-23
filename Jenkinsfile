@@ -7,6 +7,7 @@ pipeline {
         SFDX_URL = "https://curious-raccoon-bzbdvt-dev-ed.lightning.force.com"
 	SFDX_LOGIN_PWD = "3MVG9LBJLApeX_PC2OLY0P9EKpf.C6D9RMSrkNA7ymOrYXx0mi82ZJN4ookm6lzGVHRM0uAYrRb1TnoOJrPxT"
 	SFDX_LOGIN_USR = "slakkamraju@visio.com"
+	TOOLBELT = "/usr/local/bin"
 	
 
     }
@@ -21,7 +22,7 @@ pipeline {
         stage('Authenticate SFDX') {
             steps {
                 script {
-                    rc = sh (returnStatus: true, script: "sfdx force:auth:jwt:grant --clientid ${SFDX_LOGIN_PSW} --username ${SFDX_LOGIN_USR} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_URL}")
+                    rc = sh (returnStatus: true, script: "{TOOLBELT}/sfdx force:auth:jwt:grant --clientid ${SFDX_LOGIN_PSW} --username ${SFDX_LOGIN_USR} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_URL}")
                     
                     if (rc != 0) {
                          error 'Failed to authorize Salesforce DX' 

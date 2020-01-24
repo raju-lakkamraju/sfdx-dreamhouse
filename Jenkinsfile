@@ -35,12 +35,14 @@ pipeline {
             steps {
                 script {
                     // need to pull out assigned username
-                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a dreamhouse-org" --jason 
-                    //echo "${rmsg}"
+                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a dreamhouse-org" 
+                    echo "${rmsg}"
                     def robj = readJSON text: rmsg
                     if (robj.status != 0) { 
                         error 'Scratch org creation failed: ' + robj.message 
-                    }
+                    } else {
+		        echo "Scratch Org is created -- Raju" + robj.message
+		    }
                     SFDC_USERNAME=robj.result.username
                     robj = null
                 }

@@ -9,6 +9,8 @@ pipeline {
 	SFDX_DEVHUB_LOGIN_USER = "slakkamraju@visio.com"
 	SFDX_CLIENT_LIBRARIES_HOME = "/usr/local/bin"
 	SCRATCH_ORG_NAME = "sample1_ci_test"
+
+	BRANCH = env.BRANCH_NAME.replaceAll(/[\/\\]/, "")
 	
 
     }

@@ -22,19 +22,29 @@ pipeline {
             }
         }
 
-        stage('Authenticate SFDX') {
+        stage('UITest') {
             steps {
                 script {
 		   echo "on branch name: ${BRANCH}"
-		   echo "---------Authorization started"
+		   echo "---------UITest  started"
+		   build 'Proj1'
+		   echo "---------UITest  ended"
+                }
+            }
+        }
+stage('Authenticate SFDX') {
+            steps {
+                script {
+                   echo "on branch name: ${BRANCH}"
+                   echo "---------Authorization started"
                     rc = sh returnStatus: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:auth:jwt:grant --clientid ${SFDX_CONNECTED_APP_CONSUMER_KEY} --username ${SFDX_DEVHUB_LOGIN_USER} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_DEVHUB_URL} --loglevel debug"
-                    
+
                     if (rc != 0) {
-                         error 'Failed to authorize Salesforce DX' 
+                         error 'Failed to authorize Salesforce DX'
                     } else {
-			echo "Visio - Successfully authorized to DEV HUB ${SFDX_DEVHUB_URL}"
-		    }
-		   echo "---------Authorization ended"
+                        echo "Visio - Successfully authorized to DEV HUB ${SFDX_DEVHUB_URL}"
+                    }
+                   echo "---------Authorization ended"
                 }
             }
         }

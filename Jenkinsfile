@@ -23,6 +23,8 @@ pipeline {
         stage('Authenticate SFDX') {
             steps {
                 script {
+		   echo "on branch name: ${BRANCH}"
+		   echo "---------Authorization started"
                     rc = sh returnStatus: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:auth:jwt:grant --clientid ${SFDX_CONNECTED_APP_CONSUMER_KEY} --username ${SFDX_DEVHUB_LOGIN_USER} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_DEVHUB_URL} --loglevel debug"
                     
                     if (rc != 0) {
@@ -30,14 +32,16 @@ pipeline {
                     } else {
 			echo "Visio - cessfully authorized to DEV HUB ${SFDX_DEVHUB_URL}"
 		    }
+		   echo "---------Authorization ended"
                 }
             }
         }
 	stage('Create Scratch Org') {
             steps {
                 script {
+		    echo "---------Scrach creation started"
                     // need to pull out assigned username
-                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a dreamhouse-org" 
+                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a ${SCRATCH_ORG_NAME} --json" 
                     echo "${rmsg}"
                     def robj = readJSON text: rmsg
                     if (robj.status != 0) { 
@@ -47,6 +51,7 @@ pipeline {
 		    }
                     SFDC_USERNAME=robj.result.username
                     robj = null
+		    echo "---------Scrach creation ended"
                 }
             }
         }

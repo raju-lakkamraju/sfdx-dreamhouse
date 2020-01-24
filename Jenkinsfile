@@ -65,7 +65,7 @@ pipeline {
 		    echo "---------Push to Scrach org started"
                     rc = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:source:push --targetusername ${SFDC_USERNAME}" 
 		    if (rc != 0) {
-			error 'Failed pushing to scrach org (username: ${SFDC_USERNAME})"
+			error 'Failed pushing to scrach org (username: ${SFDC_USERNAME})'
 		    } else {
 			echo "Visio - Successfully pushed to scrach org (username: ${SFDC_USERNAME})"
 		    }

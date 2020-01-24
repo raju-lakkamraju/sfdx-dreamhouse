@@ -28,7 +28,7 @@ pipeline {
 		   echo "on branch name: ${BRANCH}"
 		   echo "---------UITest  started"
 		   //try {
-		     def rc = build 'Proj1'
+		      rc = build job: 'Proj1'
 		     if (rc != 0) {
 		     	echo "Visio - UITest Build is successful "
 		     	echo " RC: ${rc}"

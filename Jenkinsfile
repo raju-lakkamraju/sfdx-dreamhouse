@@ -30,10 +30,10 @@ pipeline {
 		   //try {
 		      rc = build job: 'Proj1'
 		     if (rc != 0) {
+		        echo "Visio - UITest Build Failed "
+   		     } else {
 		     	echo "Visio - UITest Build is successful "
 		     	echo " RC: ${rc}"
-   		     } else {
-		        echo "Visio - UITest Build Failed "
 		     }
 		   //} catch (Exception e){
 		   //} 

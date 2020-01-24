@@ -23,11 +23,13 @@ pipeline {
         stage('Authenticate SFDX') {
             steps {
                 script {
-                    rc = sh returnStatus: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:auth:jwt:grant --clientid ${SFDX_CONNECTED_APP_CONSUMER_KEY} --username ${SFDX_DEVHUB_LOGIN_USER} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_DEVHUB_URL}"
+                    rc = sh returnStatus: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:auth:jwt:grant --clientid ${SFDX_CONNECTED_APP_CONSUMER_KEY} --username ${SFDX_DEVHUB_LOGIN_USER} --jwtkeyfile ${SFDX_PRIVATE_KEY} --instanceurl ${SFDX_DEVHUB_URL --loglevel debug}"
                     
                     if (rc != 0) {
                          error 'Failed to authorize Salesforce DX' 
-                    }
+                    } else {
+			echo "Visio - cessfully authorized to DEV HUB ${SFDX_DEVHUB_URL}"
+		    }
                 }
             }
         }

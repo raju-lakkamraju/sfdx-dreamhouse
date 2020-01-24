@@ -32,7 +32,7 @@ pipeline {
                     if (rc != 0) {
                          error 'Failed to authorize Salesforce DX' 
                     } else {
-			echo "Visio - cessfully authorized to DEV HUB ${SFDX_DEVHUB_URL}"
+			echo "Visio - Successfully authorized to DEV HUB ${SFDX_DEVHUB_URL}"
 		    }
 		   echo "---------Authorization ended"
                 }
@@ -49,9 +49,10 @@ pipeline {
                     if (robj.status != 0) { 
                         error 'Scratch org creation failed: ' + robj.message 
                     } else {
-		        echo "Visio - Scratch Org is Successfully created " + robj.message
+		        echo "Visio - Scratch Org is Successfully created. Returned Message is:  " + robj.message
 		    }
                     SFDC_USERNAME=robj.result.username
+		    echo "Username for scrach org: ${SFDC_USERNAME}"
                     robj = null
 		    echo "---------Scrach creation ended"
                 }

@@ -27,7 +27,8 @@ pipeline {
                 script {
 		   echo "on branch name: ${BRANCH}"
 		   echo "---------UITest  started"
-		   build 'Proj1'
+		   rc = build 'Proj1'
+		   echo "${rc}"
 		   echo "---------UITest  ended"
                 }
             }

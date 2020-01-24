@@ -38,6 +38,7 @@ pipeline {
                 }
             }
         }
+/*
 	stage('Create Scratch Org') {
             steps {
                 script {
@@ -73,5 +74,6 @@ pipeline {
 		}
 	    }
 	}
+*/
     }
 }

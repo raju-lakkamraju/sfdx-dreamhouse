@@ -43,13 +43,13 @@ pipeline {
                 script {
 		    echo "---------Scrach creation started"
                     // need to pull out assigned username
-                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s -f config/project-scratch-def.json -a ${SCRATCH_ORG_NAME} --json" 
+                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s --definitionfile config/project-scratch-def.json -a ${SCRATCH_ORG_NAME} --json --targetdevhubusername ${SFDX_DEVHUB_LOGIN_USER}" 
                     echo "${rmsg}"
                     def robj = readJSON text: rmsg
                     if (robj.status != 0) { 
                         error 'Scratch org creation failed: ' + robj.message 
                     } else {
-		        echo "Scratch Org is created -- Raju" + robj.message
+		        echo "Visio - Scratch Org is Successfully created " + robj.message
 		    }
                     SFDC_USERNAME=robj.result.username
                     robj = null

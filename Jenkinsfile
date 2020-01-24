@@ -69,9 +69,9 @@ pipeline {
 		    } else {
 			echo "Visio - Successfully pushed to scrach org (username: ${SFDC_USERNAME})"
 		    }
+		    echo "---------Push to Scrach org ended"
 		}
 	    }
-		    echo "---------Push to Scrach org ended"
 	}
     }
 }

@@ -43,7 +43,7 @@ pipeline {
                 script {
 		    echo "---------Scrach org creation started"
                     // need to pull out assigned username
-                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s --definitionfile config/project-scratch-def.json --json --targetdevhubusername ${SFDX_DEVHUB_LOGIN_USER}" 
+                    rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s --definitionfile config/project-scratch-def.json --json --targetdevhubusername ${SFDX_DEVHUB_LOGIN_USER} -d 1" 
                     //rmsg = sh returnStdout: true, script: "${SFDX_CLIENT_LIBRARIES_HOME}/sfdx force:org:create -s --definitionfile config/project-scratch-def.json -a ${SCRATCH_ORG_NAME} --json --targetdevhubusername ${SFDX_DEVHUB_LOGIN_USER}" 
                     echo "${rmsg}"
                     def robj = readJSON text: rmsg

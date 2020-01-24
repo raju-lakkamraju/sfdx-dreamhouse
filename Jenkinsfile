@@ -27,13 +27,16 @@ pipeline {
                 script {
 		   echo "on branch name: ${BRANCH}"
 		   echo "---------UITest  started"
-		   try {
+		   //try {
 		     def rc = build 'Proj1'
-		     echo "Visio - UITest Build is successful "
-		     echo " RC: ${rc}"
-		   } catch (Exception e){
-		     echo "Visio - UITest Build Failed "
-		   } 
+		     if (rc != 0) {
+		     	echo "Visio - UITest Build is successful "
+		     	echo " RC: ${rc}"
+   		     } else {
+		        echo "Visio - UITest Build Failed "
+		     }
+		   //} catch (Exception e){
+		   //} 
 		   echo "---------UITest  ended"
                 }
             }

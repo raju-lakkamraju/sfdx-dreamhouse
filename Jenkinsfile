@@ -57,7 +57,7 @@ stage('Authenticate SFDX') {
                 }
             }
         }
-/*
+// /*
 	stage('Create Scratch Org') {
             steps {
                 script {
@@ -93,6 +93,6 @@ stage('Authenticate SFDX') {
 		}
 	    }
 	}
-*/
+//*/
     }
 }
